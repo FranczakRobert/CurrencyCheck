@@ -1,0 +1,9 @@
+Model/CurrencyData.class
+Main.class
+Controllers/MainPanelController.class
+View/AUserInterface.class
+Services/CurrencyService.class
+View/MainPanelGUI.class
+Controllers/CurrencyController.class
+View/OneCurrencyGUI.class
+View/AllCurrencyGUI.class
