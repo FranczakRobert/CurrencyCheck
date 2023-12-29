@@ -4,8 +4,8 @@ This program checks currency.
 To use it you must:
 
 a) You can use mine Key:
-  1. download only .jar file
-  2. run.
+  1. download only "CurrencyChecker.jar" file.
+  2. run it :)
 
 b) Ypu can use your own key:
   1. Download the key from: freecurrencyapi.com
