@@ -20,7 +20,7 @@ public class CurrencyService {
         gui.dispose();
         SwingUtilities.invokeLater(() -> new MainPanelGUI());
     }
-    public Map<String, String> getData(String baseCurrency, String currency) {
-        return new CurrencyData().getData(baseCurrency,currency);
+    public Map<String, String> getData(String baseCurrency) {
+        return new CurrencyData().getData(baseCurrency);
     }
 }

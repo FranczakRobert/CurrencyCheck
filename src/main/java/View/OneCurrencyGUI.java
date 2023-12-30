@@ -21,9 +21,9 @@ public class OneCurrencyGUI extends AUserInterface{
         feedbackPanel.setLayout(new FlowLayout());
         feedbackPanel.setBackground(new Color(43, 45, 48));
 
-        Map<String, String> currencyData = CurrencyService.getInstance().getData(baseCurrency, currency);
+        Map<String, String> currencyData = CurrencyService.getInstance().getData(baseCurrency);
 
-        super.checkIfCurrencyIsCorrect(baseCurrency, currency);
+        super.checkIfCurrencyIsCorrect(baseCurrency);
 
         JLabel label = new JLabel("1 " + baseCurrency + " = " + currencyData.get(currency) + " " + currency);
         label.setForeground(Color.WHITE);

@@ -29,14 +29,16 @@ public class AllCurrencyGUI extends AUserInterface {
         contentPanel.setLayout(new GridLayout(0, 3));
         contentPanel.setBackground(new Color(43, 45, 48));
 
-        super.checkIfCurrencyIsCorrect(baseCurrency, currency);
+        super.checkIfCurrencyIsCorrect(baseCurrency);
 
-        for (Map.Entry<String, String> set : CurrencyService.getInstance().getData(baseCurrency, currency).entrySet()) {
+
+        for (Map.Entry<String, String> set : CurrencyService.getInstance().getData(baseCurrency).entrySet()) {
             JLabel label = new JLabel(set.getKey() + " : " + set.getValue());
             label.setForeground(Color.WHITE);
             label.setHorizontalAlignment(SwingConstants.LEFT);
             contentPanel.add(label);
         }
+
 
         JButton backButton = new JButton("BACK");
         backButton.addActionListener(e -> CurrencyService.getInstance().goBack(this));

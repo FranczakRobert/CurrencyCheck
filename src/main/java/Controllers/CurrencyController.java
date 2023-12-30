@@ -1,7 +1,10 @@
 package Controllers;
 
+import Enums.E_TYPE;
+import Utils.ErrorHandler;
 import org.json.JSONObject;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,18 +13,11 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class CurrencyController {
-    private String currency = ""; //"&currencies=PLN";
-    private String base = "";     //&base_currency=
+    private String base = "";
     private URL url = null;
     private HttpURLConnection connection = null;
 
-    public CurrencyController()  {
-
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = "&currencies=" + currency;
-    }
+    public CurrencyController(){}
 
     public void setBase(String baseCurrency) {
         if(!baseCurrency.isEmpty())
@@ -43,6 +39,8 @@ public class CurrencyController {
 
         } catch (IOException e) {
             System.out.println("Connection Error : " + e.getMessage());
+            JOptionPane.showMessageDialog( null,"Connection lost...");
+            ErrorHandler.getInstance().setErrorStatus(E_TYPE.E_CONNECTION_LOST);
         }
 
     }
@@ -58,6 +56,7 @@ public class CurrencyController {
             scanner.close();
         } catch (IOException e) {
             System.out.println("Read from URL error : " + e.getMessage());
+            ErrorHandler.getInstance().setErrorStatus(E_TYPE.E_INVALID_DATA);
         } finally {
             connection.disconnect();
         }
@@ -68,14 +67,14 @@ public class CurrencyController {
     private void initUrl() {
         try {
             String APIKey = readAPIKey();
-            String request = "https://api.freecurrencyapi.com/v1/latest?apikey=" + APIKey + currency + base;
+            String request = "https://api.freecurrencyapi.com/v1/latest?apikey=" + APIKey + base;
             url = new URL(request);
 
         } catch (IOException e) {
             System.out.println("URL error : " + e.getMessage());
+            ErrorHandler.getInstance().setErrorStatus(E_TYPE.E_INVALID_DATA);
         }
         base = "";
-        currency = "";
     }
     private String readAPIKey() {
         StringBuilder key = new StringBuilder();

@@ -7,21 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CurrencyData {
-    public Map<String, String> getData(String baseCurrency, String currentCurrency) {
+    public Map<String, String> getData(String baseCurrency) {
         Map<String, String > mapData = new HashMap<>();
         JSONObject data;
         try {
             CurrencyController currencyController = new CurrencyController();
-            currencyController.setCurrency(currentCurrency);
-            currencyController.setCurrency("");
-
-            if(!baseCurrency.isEmpty())
-                currencyController.setBase(baseCurrency);
-            else
-                currencyController.setBase("");
+            currencyController.setBase(baseCurrency);
             currencyController.startURL();
-
             data = currencyController.readFromURL();
+
         } catch (Exception e) {
             mapData = null;
             return mapData;

@@ -1,6 +1,7 @@
 package View;
 
 import Services.CurrencyService;
+import Utils.ErrorHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,10 +20,20 @@ public abstract class AUserInterface extends JFrame {
 
     protected abstract void createPanel(String baseCurrency, String currency);
 
-    protected void checkIfCurrencyIsCorrect(String baseCurrency, String currency) {
-        if(CurrencyService.getInstance().getData(baseCurrency,currency) == null) {
-            JOptionPane.showMessageDialog(this, "BAD FORMAT");
-            CurrencyService.getInstance().goBack(this);
+    protected boolean checkIfCurrencyIsCorrect(String baseCurrency) {
+        if(CurrencyService.getInstance().getData(baseCurrency) == null) {
+            switch (ErrorHandler.getInstance().getErrorStatus()) {
+                case E_CONNECTION_LOST ->  {
+                    JOptionPane.showMessageDialog(this, "CONNECTION LOST");
+                    CurrencyService.getInstance().goBack(this);
+                }
+                case E_INVALID_DATA-> {
+                    JOptionPane.showMessageDialog(this, "Invalid data");
+                    CurrencyService.getInstance().goBack(this);
+                }
+            }
+            return false;
         }
+        return true;
     }
 }
