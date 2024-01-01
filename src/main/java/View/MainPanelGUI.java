@@ -21,7 +21,7 @@ public class MainPanelGUI extends AUserInterface {
         JPanel contentPanel = new JPanel();
         contentPanel.setBackground(new Color(43, 45, 48));
         contentPanel.setLayout(new BorderLayout());
-
+// HEAD PANEL
         JPanel head = new JPanel();
         head.setBackground(new Color(43, 45, 48));
         head.setLayout(new GridLayout(1, 5));
@@ -44,7 +44,7 @@ public class MainPanelGUI extends AUserInterface {
 
         JButton showOne = new JButton("Check");
         head.add(showOne);
-
+// BODY PANEL
         JPanel bodyPanel = new JPanel();
         bodyPanel.setBackground(new Color(43, 45, 48));
         bodyPanel.setLayout(new FlowLayout());
@@ -60,12 +60,21 @@ public class MainPanelGUI extends AUserInterface {
         JButton showAll = new JButton("All");
         bodyPanel.add(showAll);
 
+// CURRIENCIES PANEL
+        JPanel curPanel = new JPanel();
+        curPanel.setBackground(new Color(43, 45, 48));
+        curPanel.setLayout(new FlowLayout());
+
+        for (String s : mainPanelController.fetchCurrencies())
+            curPanel.add(new JLabel(s));
+
         showAll.addActionListener(e -> mainPanelController.showAll(this, baseCurrencyBodyTF.getText(), ""));
         showOne.addActionListener(e -> mainPanelController.showOne(this, baseCurrencyTF.getText(), currencyTF.getText()));
 
         contentPanel.add(head, BorderLayout.NORTH);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
-
+        contentPanel.add(new Label("  Available currencies:",Label.CENTER), BorderLayout.BEFORE_LINE_BEGINS);
+        contentPanel.add(curPanel,BorderLayout.AFTER_LAST_LINE);
         setContentPane(contentPanel);
 
         pack();
