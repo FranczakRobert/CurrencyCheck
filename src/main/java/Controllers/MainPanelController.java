@@ -6,6 +6,7 @@ import View.OneCurrencyGUI;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainPanelController {
     public void showAll(JFrame gui, String baseCurrency, String currency){
@@ -18,7 +19,9 @@ public class MainPanelController {
     }
 
     public ArrayList<String> fetchCurrencies() {
-        return new ArrayList<>(CurrencyService.getInstance().getData("").keySet());
+        ArrayList<String> curriencies = new ArrayList<>(CurrencyService.getInstance().getData("").keySet());;
+        Collections.sort(curriencies);
+        return curriencies;
     }
 
 }
