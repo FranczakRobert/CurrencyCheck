@@ -10,14 +10,11 @@ public class AllCurrencyGUI extends AUserInterface {
 
     public AllCurrencyGUI(String baseCurrency, String currency) {
         initFrame();
-        createPanel(baseCurrency,currency);
+        createPanel(baseCurrency, currency);
     }
 
     protected void createPanel(String baseCurrency, String currency) {
-        if (currency.isEmpty())
-            currency = "USD";
-
-        JLabel header = new JLabel("For One: " + currency + "\n you can BUY: ", SwingConstants.CENTER);
+        JLabel header = new JLabel("For One: " + baseCurrency + "\n you can BUY: ", SwingConstants.CENTER);
         header.setForeground(Color.WHITE);
 
         JPanel headerPanel = new JPanel();
@@ -26,19 +23,15 @@ public class AllCurrencyGUI extends AUserInterface {
         headerPanel.add(header);
 
         JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(0, 3));
+        contentPanel.setLayout(new GridLayout(0, 3, 10, 10)); // Dodane marginesy między ramkami
         contentPanel.setBackground(new Color(43, 45, 48));
 
         super.checkIfCurrencyIsCorrect(baseCurrency);
 
-
         for (Map.Entry<String, String> set : CurrencyService.getInstance().getData(baseCurrency).entrySet()) {
-            JLabel label = new JLabel(set.getKey() + " : " + set.getValue());
-            label.setForeground(Color.WHITE);
-            label.setHorizontalAlignment(SwingConstants.LEFT);
-            contentPanel.add(label);
+            JPanel currencyPanel = createCurrencyPanel(set.getKey(), set.getValue());
+            contentPanel.add(currencyPanel);
         }
-
 
         JButton backButton = new JButton("BACK");
         backButton.addActionListener(e -> CurrencyService.getInstance().goBack(this));
@@ -63,4 +56,22 @@ public class AllCurrencyGUI extends AUserInterface {
         setVisible(true);
     }
 
+    private JPanel createCurrencyPanel(String currency, String value) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new Color(60, 63, 65)); // Dodałem inny kolor tła dla ramki
+        panel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Dodane obramowanie ramki
+
+        JLabel nameLabel = new JLabel(currency);
+        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(nameLabel, BorderLayout.NORTH);
+
+        JLabel valueLabel = new JLabel("Value: " + value);
+        valueLabel.setForeground(Color.WHITE);
+        valueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(valueLabel, BorderLayout.CENTER);
+
+        return panel;
+    }
 }

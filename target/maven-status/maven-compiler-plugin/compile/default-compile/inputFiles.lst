@@ -1,4 +1,5 @@
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Main.java
+/Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Utils/ErrorHandler.java
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Controllers/MainPanelController.java
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/View/AUserInterface.java
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Services/CurrencyService.java
@@ -6,4 +7,5 @@
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/View/OneCurrencyGUI.java
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Controllers/CurrencyController.java
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/View/AllCurrencyGUI.java
+/Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Enums/E_TYPE.java
 /Users/robertfranczak/Code/Java/CurrencyChecker/src/main/java/Model/CurrencyData.java

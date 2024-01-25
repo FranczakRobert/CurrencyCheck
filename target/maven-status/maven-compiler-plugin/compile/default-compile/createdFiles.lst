@@ -1,8 +1,11 @@
+Utils/ErrorHandler.class
 Model/CurrencyData.class
 Main.class
 Controllers/MainPanelController.class
+Enums/E_TYPE.class
 View/AUserInterface.class
 Services/CurrencyService.class
+View/AUserInterface$1.class
 View/MainPanelGUI.class
 Controllers/CurrencyController.class
 View/OneCurrencyGUI.class
