@@ -59,8 +59,8 @@ public class AllCurrencyGUI extends AUserInterface {
     private JPanel createCurrencyPanel(String currency, String value) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBackground(new Color(60, 63, 65)); // Dodałem inny kolor tła dla ramki
-        panel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Dodane obramowanie ramki
+        panel.setBackground(new Color(60, 63, 65));
+        panel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
         JLabel nameLabel = new JLabel(currency);
         nameLabel.setForeground(Color.WHITE);

@@ -4,11 +4,9 @@ import Controllers.MainPanelController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainPanelGUI extends AUserInterface {
-
-    private JTextField baseCurrencyTF;
-    private JTextField currencyTF;
     private MainPanelController mainPanelController;
 
     public MainPanelGUI() {
@@ -21,52 +19,27 @@ public class MainPanelGUI extends AUserInterface {
         JPanel contentPanel = new JPanel();
         contentPanel.setBackground(new Color(43, 45, 48));
         contentPanel.setLayout(new BorderLayout());
+        ArrayList<String> avaliableCurriencies = mainPanelController.fetchCurrencies();
+
 // HEAD PANEL
-
-
-
-        JPanel head = new JPanel();
-        head.setBackground(new Color(43, 45, 48));
-        head.setLayout(new GridLayout(1, 5));
-
-        JLabel label = new JLabel("Currency: ", JLabel.CENTER);
-        label.setForeground(Color.WHITE);
-        head.add(label);
-
         JComboBox<String> boxONE = new JComboBox<>();
-        SwingUtilities.invokeLater(() -> {
-            for (String s : mainPanelController.fetchCurrencies())
-                boxONE.addItem(s);
-        });
-        head.add(boxONE);
-
-        JLabel label2 = new JLabel("-> ", JLabel.CENTER);
-        label2.setForeground(Color.WHITE);
-        head.add(label2);
-
         JComboBox<String> boxTWO = new JComboBox<>();
-        SwingUtilities.invokeLater(() -> {
-            for (String s : mainPanelController.fetchCurrencies())
-                boxTWO.addItem(s);
-        });
-        head.add(boxTWO);
+
+        fillOutBox(boxONE,avaliableCurriencies);
+        fillOutBox(boxTWO,avaliableCurriencies);
+
+        JPanel head = createHeadPanel(boxONE, boxTWO);
 
         JButton showOne = new JButton("Check");
         head.add(showOne);
-// BODY PANEL
-        JPanel bodyPanel = new JPanel();
-        bodyPanel.setBackground(new Color(43, 45, 48));
-        bodyPanel.setLayout(new FlowLayout());
 
-        JLabel cur = new JLabel("Currency: ", JLabel.CENTER);
-        cur.setForeground(Color.WHITE);
-        bodyPanel.add(cur);
+
+// BODY PANEL
+        JPanel bodyPanel = createBodyPanel();
 
         JComboBox<String> boxForAll = new JComboBox<>();
-        SwingUtilities.invokeLater(() -> {
-            for (String s : mainPanelController.fetchCurrencies())
-                boxForAll.addItem(s);
-        });
+        fillOutBox(boxForAll,avaliableCurriencies);
+
         bodyPanel.add(boxForAll);
 
         JButton showAll = new JButton("All");
@@ -77,8 +50,7 @@ public class MainPanelGUI extends AUserInterface {
 
         contentPanel.add(head, BorderLayout.NORTH);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
-//        contentPanel.add(new Label("  Available currencies:",Label.CENTER), BorderLayout.BEFORE_LINE_BEGINS);
-//        contentPanel.add(box,BorderLayout.AFTER_LAST_LINE);
+
         setContentPane(contentPanel);
 
         pack();
@@ -87,6 +59,40 @@ public class MainPanelGUI extends AUserInterface {
         setVisible(true);
     }
 
+    private JPanel createHeadPanel(JComboBox<String> box1, JComboBox<String> box2) {
+        JPanel head = new JPanel();
+        head.setBackground(new Color(43, 45, 48));
+        head.setLayout(new GridLayout(1, 5));
 
+        JLabel label = new JLabel("Currency: ", JLabel.CENTER);
+        label.setForeground(Color.WHITE);
+        head.add(label);
 
+        head.add(box1);
+
+        JLabel label2 = new JLabel("-> ", JLabel.CENTER);
+        label2.setForeground(Color.WHITE);
+        head.add(label2);
+        head.add(box2);
+        return head;
+    }
+
+    private JPanel createBodyPanel() {
+        JPanel bodyPanel = new JPanel();
+        bodyPanel.setBackground(new Color(43, 45, 48));
+        bodyPanel.setLayout(new FlowLayout());
+
+        JLabel cur = new JLabel("Currency: ", JLabel.CENTER);
+        cur.setForeground(Color.WHITE);
+        bodyPanel.add(cur);
+
+        return bodyPanel;
+    }
+
+    private void fillOutBox(JComboBox<String> box, ArrayList<String> avaliableCurriencies) {
+        SwingUtilities.invokeLater(() -> {
+            for (String s : avaliableCurriencies)
+                box.addItem(s);
+        });
+    }
 }
